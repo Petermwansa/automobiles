@@ -15,6 +15,8 @@ $failure = false;  // If we have no POST data
 if ( isset($_POST['who']) && isset($_POST['pass']) ) {
     if ( strlen($_POST['who']) < 1 || strlen($_POST['pass']) < 1 ) {
         $failure = "User name and password are required";
+    } else if ( strpos(strlen($_POST['who']), "@") ){
+        $failure = "Username not valid";
     } else {
         $check = hash('md5', $salt.$_POST['pass']);
         if ( $check == $stored_hash ) {
@@ -34,7 +36,7 @@ if ( isset($_POST['who']) && isset($_POST['pass']) ) {
 <html>
 <head>
 <?php require_once "bootstrap.php"; ?>
-<title>Peter Mwansa Login Page</title>
+<title>Peter Mwansa</title>
 </head>
 <body>
 <div class="container">
